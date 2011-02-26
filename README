@@ -1,0 +1,23 @@
+Install nodejs using:
+	sudo add-apt-repository ppa:jerome-etienne/neoip && sudo apt-get update && sudo apt-get install nodejs
+	or, if so inclined you can look up how to pull the latest build from git and make it
+
+Start the server:
+	open a command line to the folder with server.js
+	enter: node server.js
+
+Connect to server:
+	telnet clients are used for now
+	enter: telnet localhost 8124    to connect
+	enter sample commands to show off narrow/broad casting
+
+
+Copyright 2010 David Gerdeman
+
+This file is part of Loaded Icosagon
+
+Loaded Icosagon is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+Loaded Icosagon is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with Loaded Icosagon. If not, see http://www.gnu.org/licenses/.
