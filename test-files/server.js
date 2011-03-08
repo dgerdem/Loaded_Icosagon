@@ -2,41 +2,41 @@ var net = require('net');
 var num = 1;
 var con_pool = [];  //contains connection data for clients
 var id_pool = [];  //contains IDs of clients that have connected
-
+var mail = {"type":"", "payload":"", "other":""}; //server -> client(s) message
+/* client -> server message
+{routing:"list of comma delimited names",
+type:"what type of message is it?",  
+payload:"payload sent to recipient(s)",
+other:"I dunno, thought it would be nice to have an extra field" 
+ }
+*/
 var server = net.createServer(function (c) {
-	c.write('hello\r\n', encoding='ascii');
 	con_pool.push(c);
 	console.log("user " + num +  " connected");
 	num++;
 	
 	c.on('data', function(hand) {
-		var str = hand.toString('ascii', start=0, end=hand.length);//remove when not using buffer
-		var parts = str.split(',');
-		if (parts[0] == 'narrow') {//narrowcast message
-			
-		} else if (parts[0] == 'broad') {//broadcast message
-			
-		} else if (parts[0] == 'id') {//check in and send updated player list
+		var msg = hand;//convert hand to json object
+		var recip = msg.routing.split(',');
+		if (msg.type == 'id') {//client registers with the server
 		//TODO: event must be recieved after a connection is made...
-			id_pool.push(parts[1]);
+			id_pool.push(msg.payload);
 			for (con in con_pool) {
-				con_pool[con].write("id_pool," + arrayToString(), encoding='ascii');	
+				con_pool[con].write(setMail('id', id_pool.toString(), ''), encoding='ascii');	
+			}	
+		} else if (msg.type == 'roll') {//roll related message, payload and other are important
+			con_pool[searchName('dm')].write(setMail("roll", msg.payload, msg.other), encoding='ascii');
+		} else if (msg.type == 'chat') {//chat messages between clients
+			for (r in recip) {
+				con_pool[searchName(recip[r])].write(setMail('chat', msg.payload, msg.other), encoding='ascii');
 			}
-		} else if (parts[0] == 'roll') {//roll handling
-			
+		} else if (msg.type == 'alert') {//and alert message sent from the dm to one or more clients
+			for (r in recip) {
+				con_pool[searchName(recip[r])].write(setMail('alert', msg.payload, msg.other), encoding='ascii');
+			}
 		}
 	});
-//replaces a comma delimited string with a semicolon delimited string.	
-	function arrayToString() {
-		var temp_str = id_pool.toString();
-		var swapped = temp_str.replace(/,/gi, ';');
-		return swapped;
-	}
-//decides how to route rest of the message
-	function secondStageParser(msg) {
-		if (msg[1] = 'DM')
-	}
-//checks if a given name is in the id pool and
+//checks if a given name is in the id pool and 
 	function searchName(id) {
 		for (i in id_pool) {
 			if (id_pool[i] == id) {
@@ -44,6 +44,13 @@ var server = net.createServer(function (c) {
 			}
 		}
 		return false;
+	}
+	function setMail(type, payload, other) {
+		var new_mail = mail;
+		new_mail.type = type;
+		new_mail.payload = payload;
+		new_mail.other = other;
+		return new_mail;
 	}
 });
 
