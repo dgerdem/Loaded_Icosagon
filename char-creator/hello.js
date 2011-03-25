@@ -42,22 +42,23 @@ var group4 = new joGroup([
 	new joInput("").setStyle({width: "75px"})]);		
 
 var statGroup1 = new joGroup([
-	new joFlexrow([new joLabel("Ability"),new joLabel("Score"),new joLabel("Mod"),new joLabel("Temp Added")]),
-	new joFlexrow([new joLabel("STR"),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"})]),
-	new joFlexrow([new joLabel("DEX"),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"})]),
-	new joFlexrow([new joLabel("CON"),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"})]),
-	new joFlexrow([new joLabel("INT"),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"})]),
-	new joFlexrow([new joLabel("WIS"),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"})]),
-	new joFlexrow([new joLabel("CHA"),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"})])
-]);	 
+	new joFlexrow([new joLabel("Ability").setStyle({width: "35px"}),new joLabel("Score").setStyle({width: "35px"}),new joLabel("Mod").setStyle({width: "35px"}),new joLabel("Temp").setStyle({width: "35px"})]),
+	new joFlexrow([new joLabel("STR").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"})]),
+	new joFlexrow([new joLabel("DEX").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"})]),
+	new joFlexrow([new joLabel("CON").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"})]),
+	new joFlexrow([new joLabel("INT").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"})]),
+	new joFlexrow([new joLabel("WIS").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"})]),
+	new joFlexrow([new joLabel("CHA").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"}),new joInput("").setStyle({width: "35px"})])
+]);
 
+var statGroup2 = new joGroup();
 
 var slct = ["Character Sheet","Skills/Spells/Feats","Inventory"];
 // create our view card
 var card = new joCard([
     new joFlexrow([new joOption(slct)]),
 	new joFlexrow([group1, group2, group3, group4]),
-	new joFlexrow([statGroup1]),
+	new joFlexrow([statGroup1,statGroup2]),
     new joButton("OK").selectEvent.subscribe(function() {
         stack.hide();
     })
