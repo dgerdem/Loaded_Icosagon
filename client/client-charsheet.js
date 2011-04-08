@@ -1,10 +1,9 @@
-// initialize jo
-jo.load();
 
-// setup a stack and screen
-var stack = new joStackScroller();
-var scn = new joScreen(stack);
-var row1col1 = new joGroup([
+
+// create our view card
+joCache.set("charsheet", function() {
+	
+	var row1col1 = new joGroup([
 	new joLabel("Name: "),
 	new joLabel("Race: "),
 	new joLabel("Alignment: "),
@@ -21,7 +20,7 @@ var row1col3 = new joGroup([
 	new joLabel("Gender: ")]);
 var row1col4 = new joGroup([
 	new joLabel("Height: "),
-	new joLabel("Weight: "),,
+	new joLabel("Weight: "),
 	new joLabel("Eye Color: "),
 	new joLabel("Hair Color: ")]);		
 //contains ability score information
@@ -63,14 +62,35 @@ var row3col2 = new joGroup([
 	new joFlexrow([new joLabel("Ranged").setStyle({width: "35px"}),new joInput().setStyle({width: "35px"}),new joInput().setStyle({width: "35px"}),new joInput().setStyle({width: "35px"}),new joInput().setStyle({width: "35px"})])
 ]);	
  
-var slct = ["Character Sheet","Skills/Spells/Feats","Inventory"];
-// create our view card
-var card = new joCard([
-    new joFlexrow([new joOption(slct)]),
-	new joFlexrow([row1col1,row1col2,row1col3,row1col4]),
-	new joFlexrow([row2col1,row2col2]),
-	new joFlexrow([row3col1,row3col2])
-]);
+var slct = ["Login/Chat","Action Console","Spells/Feats/Skills","Inventory","Character Sheet"];
 
-// put the card on our view stack
-stack.push(card);
+	var card = new joCard([
+	    new joOption(slct).selectEvent.subscribe(function(value){
+			switch(value){
+			case "0":
+				App.stack.push(joCache.get("login"));
+				break;
+			case "1":
+				App.stack.push(joCache.get("action"));
+				break;
+			case "2":
+				App.stack.push(joCache.get("sfs"));
+				break
+			case "3":
+				App.stack.push(joCache.get("inventory"));
+				break
+			case "4":
+				App.stack.push(joCache.get("charsheet"));
+				break;
+			default:
+				break;
+			}
+		}),
+		new joFlexrow([row1col1,row1col2,row1col3,row1col4]),
+		new joFlexrow([row2col1,row2col2]),
+		new joFlexrow([row3col1,row3col2])
+	]).setTitle("Character Sheet");
+	return card;
+});
+
+
