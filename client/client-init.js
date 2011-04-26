@@ -13,29 +13,44 @@ App = {
 		var slct = ["Login/Chat","Action Console","Spells/Feats/Skills","Inventory","Character Sheet"];
 //holds info for login
 		var row1col1 = new joGroup([
-			new joFlexrow([new joLabel("Player name").setStyle({width: "35px"}),new joInput().setStyle({width: "35px"})]),
-			new joFlexrow([new joLabel("Password").setStyle({width: "35px"}),new joInput().setStyle({width: "35px"})]),
-			new joFlexrow([new joLabel("Host IP").setStyle({width: "35px"}),new joInput().setStyle({width: "35px"})]),
-			new joFlexrow([new joLabel("Host Port").setStyle({width: "35px"}),new joInput().setStyle({width: "35px"})]),
+			new joFlexrow([
+				new joLabel("Player name").setStyle({width: "35px"}),
+				new joInput().setStyle({width: "35px"})]),
+			new joFlexrow([
+				new joLabel("Password").setStyle({width: "35px"}),
+				new joInput().setStyle({width: "35px"})]),
+			new joFlexrow([
+				new joLabel("Host IP").setStyle({width: "35px"}),
+				new joInput().setStyle({width: "35px"})]),
+			new joFlexrow([
+				new joLabel("Host Port").setStyle({width: "35px"}),
+				new joInput().setStyle({width: "35px"})]),
 			new joButton("Log In")	
 		]);
 //holds an output console
 		var row1col2 = new joGroup([
 			new joLabel("Output Console"),
-			new joFlexcol([new joTextarea().setStyle({minHeight: "100px",maxHeight: "100px"})])
+			new joFlexcol([
+				new joTextarea().setStyle({minHeight: "100px",maxHeight: "100px"})])
 		]); 
 //private chat box
 		var row2col1 = new joGroup([
-			new joFlexrow([new joLabel("Player").setStyle({width: "35px"}), new joSelect(["player1","player2","player3"])]),
+			new joFlexrow([
+				new joLabel("Player").setStyle({width: "35px"}), 
+				new joSelect(["player1","player2","player3"])]),
 			new joLabel("Private Messages"),
-			new joFlexcol([new joTextarea().setStyle({minHeight: "100px",maxHeight: "100px"})]),
+			new joFlexcol([
+				new joTextarea().setStyle({minHeight: "100px",maxHeight: "100px"})]),
 			new joButton("Send Message to ")
 		]);
 //all chat (needs work
 		var row2col2 = new joGroup([
-			new joFlexrow([new joLabel("Player").setStyle({width: "35px"}), new joSelect(["player1","player2","player3"])]),
+			new joFlexrow([
+				new joLabel("Player").setStyle({width: "35px"}), 
+				new joSelect(["player1","player2","player3"])]),
 			new joLabel("Public Messages"),
-			new joFlexcol([new joTextarea().setStyle({minHeight: "100px",maxHeight: "100px"})]),
+			new joFlexcol([
+				new joTextarea().setStyle({minHeight: "100px",maxHeight: "100px"})]),
 			new joButton("Send Message to all")
 		]);		
 //sets up the joCache for on-demand retrieval
