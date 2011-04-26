@@ -2,13 +2,26 @@ joCache.set("inventory", function() {
 	var slct = ["Login/Chat","Action Console","Spells/Feats/Skills","Inventory","Character Sheet"];
 	
 //item list
-	var row1col1 = new joGroup([new joLabel("Inventory"), new joSelect(["item1", "item2"]),new joLabel("Selected: "+""), new joButton("Equip Selected Item")]);
+	var row1col1 = new joGroup([
+		new joLabel("Inventory"), 
+		new joSelect(["item1", "item2"]),
+		new joLabel("Selected: "+""), 
+		new joButton("Equip Selected Item")]);
 //item attributes
-	var row1col2 = new joGroup([new joLabel("Selected Item Attributes"), new joTable([["Name:",""],["Quantity:",""],["Description:",""],["Mods",""]])]);
+	var row1col2 = new joGroup([
+		new joLabel("Selected Item Attributes"), 
+		new joTable([["Name:",""],["Quantity:",""],["Description:",""],["Mods",""]])]);
 //equipped list
-	var row2col1 = new joGroup([new joLabel("List of Equipped"), new joSelect(["",""]), new joLabel("Selected: "+""),new joButton("Remove Selected")]);
+	var row2col1 = new joGroup([
+		new joLabel("List of Equipped"), 
+		new joSelect(["",""]), 
+		new joLabel("Selected: "+""),
+		new joButton("Remove Selected")]);
 //add item to list	
-	var row2col2 = new joGroup([new joLabel("Set Item Attributes"), new joTable([["Name:",""],["Quantity:",""],["Description:",""],["Mods",""]]),new joButton("Add to Inventory")]);
+	var row2col2 = new joGroup([
+		new joLabel("Set Item Attributes"), 
+		new joTable([["Name:",""],["Quantity:",""],["Description:",""],["Mods",""]]),
+		new joButton("Add to Inventory")]);
 	
 	var card = new joCard([
 		new joOption(slct).selectEvent.subscribe(function(value){
