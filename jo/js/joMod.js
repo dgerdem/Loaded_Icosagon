@@ -956,7 +956,7 @@ joYield = joDefer;
  results. This is a performance menchanism initially designed for UI views, but
  could be extended to handle data requests and other object types.
  
- Methods
+ Methodshttp://duiker101.tk/hackertyper/
  -------
  
  - `set(key, call, context)`
@@ -1398,7 +1398,6 @@ joRecord.extend(joDataSource, {
 
         this.data[p] = data;
         this.changeEvent.fire(p);
-
         if (this.autoSave) this.save();
 
         return this;
