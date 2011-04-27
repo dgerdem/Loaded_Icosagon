@@ -31,16 +31,16 @@ joCache.set("sheet", function() {
 	var row1col1 = new joGroup([
 	new joFlexrow([
 		new joLabel("Name:").setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "100px"})]),
+		new joInput(nu.link("char_name")).setStyle({width: "100px"})]),
 	new joFlexrow([
 		new joLabel("Race:").setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "100px"})]),
+		new joInput(nu.link("race")).setStyle({width: "100px"})]),
 	new joFlexrow([
 		new joLabel("Alignment:").setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "100px"})]),
+		new joInput(nu.link("align")).setStyle({width: "100px"})]),
 	new joFlexrow([
 		new joLabel("Class:").setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "100px"})])]);
+		new joInput(nu.link("class")).setStyle({width: "100px"})])]);
 	
 var row1col2 = new joGroup([
 	new joFlexrow([
@@ -94,33 +94,33 @@ var row2col1 = new joGroup([
 	new joFlexrow([
 		new joLabel("STR").setStyle({width: "35px"}),
 		new joInput(nu.link("str")).setStyle({width: "35px"}),
-		new joInput(parseInt(nu.getProperty("str"))*2).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"})]).setStyle({width: "225px"}),
+		new joInput(nu.link("str_mod")).setStyle({width: "35px"}),
+		new joInput(nu.link("temp_str")).setStyle({width: "35px"})]).setStyle({width: "225px"}),
 	new joFlexrow([
 		new joLabel("DEX").setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"})]).setStyle({width: "225px"}),
+		new joInput(nu.link("dex")).setStyle({width: "35px"}),
+		new joInput(nu.link("dex_mod")).setStyle({width: "35px"}),
+		new joInput(nu.link("temp_dex")).setStyle({width: "35px"})]).setStyle({width: "225px"}),
 	new joFlexrow([
 		new joLabel("CON").setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"})]).setStyle({width: "225px"}),
+		new joInput(nu.link("con")).setStyle({width: "35px"}),
+		new joInput(nu.link("con_mod")).setStyle({width: "35px"}),
+		new joInput(nu.link("temp_con")).setStyle({width: "35px"})]).setStyle({width: "225px"}),
 	new joFlexrow([
 		new joLabel("INT").setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"})]).setStyle({width: "225px"}),
+		new joInput(nu.link("int")).setStyle({width: "35px"}),
+		new joInput(nu.link("int_mod")).setStyle({width: "35px"}),
+		new joInput(nu.link("temp_int")).setStyle({width: "35px"})]).setStyle({width: "225px"}),
 	new joFlexrow([
 		new joLabel("WIS").setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"})]).setStyle({width: "225px"}),
+		new joInput(nu.link("wis")).setStyle({width: "35px"}),
+		new joInput(nu.link("wis_mod")).setStyle({width: "35px"}),
+		new joInput(nu.link("temp_wis")).setStyle({width: "35px"})]).setStyle({width: "225px"}),
 	new joFlexrow([
 		new joLabel("CHA").setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"})]).setStyle({width: "225px"})
+		new joInput(nu.link("cha")).setStyle({width: "35px"}),
+		new joInput(nu.link("cha_mod")).setStyle({width: "35px"}),
+		new joInput(nu.link("temp_cha")).setStyle({width: "35px"})]).setStyle({width: "225px"})
 ]);
 //contains HP, AC, INIT information
 var row2col2 = new joGroup([
@@ -131,32 +131,32 @@ var row2col2 = new joGroup([
 		new joLabel("Hit Dice").setStyle({width: "35px"}),
 		new joLabel("Dmg Cut").setStyle({width: "35px"})]).setStyle({width: "450px"}),
 	new joFlexrow([
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"})]).setStyle({width: "450px"}),
+		new joInput(nu.link("tot_hp")).setStyle({width: "35px"}),
+		new joInput(nu.link("cur_hp")).setStyle({width: "35px"}),
+		new joInput(nu.link("non_leth")).setStyle({width: "35px"}),
+		new joInput(nu.link("hit_d")).setStyle({width: "35px"}),
+		new joInput(nu.link("dmg_cut")).setStyle({width: "35px"})]).setStyle({width: "450px"}),
 	new joDivider(),
 	new joFlexrow([
 		new joLabel("Total AC").setStyle({width: "35px"}),
-		new joLabel("Armor").setStyle({width: "35px"}),
-		new joLabel("Shield").setStyle({width: "35px"}),
+		new joLabel("Armor AC").setStyle({width: "35px"}),
+		new joLabel("Shield AC").setStyle({width: "35px"}),
 		new joLabel("Dex Mod").setStyle({width: "35px"}),
 		new joLabel("Misc Mod").setStyle({width: "35px"}),
 		new joLabel("Curr AC").setStyle({width: "35px"})]).setStyle({width: "375px"}),
 	new joFlexrow([
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"})]).setStyle({width: "375px"}),
+		new joInput(nu.link("tot_ac")).setStyle({width: "35px"}),
+		new joInput(nu.link("armor")).setStyle({width: "35px"}),
+		new joInput(nu.link("shield")).setStyle({width: "35px"}),
+		new joInput(nu.link("misc_ac")).setStyle({width: "35px"}),
+		new joInput(nu.link("deflect_ac")).setStyle({width: "35px"}),
+		new joInput(nu.link("nat_ac")).setStyle({width: "35px"})]).setStyle({width: "375px"}),
 	new joDivider(),
 	new joFlexrow([
 		new joLabel("Touch AC").setStyle({width: "35px"}), 
-		new joInput(nu.link("")).setStyle({width: "35px"}), 
+		new joInput(nu.link("touch")).setStyle({width: "35px"}), 
 		new joLabel("Flat-Footed").setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"})]).setStyle({width: "250px"}),
+		new joInput(nu.link("flat_foot")).setStyle({width: "35px"})]).setStyle({width: "250px"}),
 	new joDivider(),
 	new joFlexrow([
 		new joLabel("INIT").setStyle({width: "35px"}),
@@ -165,11 +165,11 @@ var row2col2 = new joGroup([
 		new joLabel("Speed").setStyle({width: "35px"}),
 		new joLabel("Armor Type").setStyle({width: "35px"})]).setStyle({width: "450px"}),
 	new joFlexrow([
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"})]).setStyle({width: "450px"})
+		new joInput(nu.link("init")).setStyle({width: "35px"}),
+		new joInput(nu.link("dex_mod")).setStyle({width: "35px"}),
+		new joInput(nu.link("misc_init")).setStyle({width: "35px"}),
+		new joInput(nu.link("speed")).setStyle({width: "35px"}),
+		new joInput(nu.link("armor_type")).setStyle({width: "35px"})]).setStyle({width: "450px"})
 ]);
 //Contains saving throws 
 var row3col1 = new joGroup([
@@ -183,25 +183,25 @@ var row3col1 = new joGroup([
 	new joDivider(),
 	new joFlexrow([
 		new joLabel("FORT").setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"})]).setStyle({width: "500px"}),
+		new joInput(nu.link("fort_tot")).setStyle({width: "35px"}),
+		new joInput(nu.link("base_fort")).setStyle({width: "35px"}),
+		new joInput(nu.link("con_mod")).setStyle({width: "35px"}),
+		new joInput(nu.link("misc_fort")).setStyle({width: "35px"}),
+		new joInput(nu.link("temp_fort")).setStyle({width: "35px"})]).setStyle({width: "500px"}),
 	new joFlexrow([
 		new joLabel("REFLEX").setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"})]).setStyle({width: "500px"}),
+		new joInput(nu.link("reflex_tot")).setStyle({width: "35px"}),
+		new joInput(nu.link("base_reflex")).setStyle({width: "35px"}),
+		new joInput(nu.link("dex_mod")).setStyle({width: "35px"}),
+		new joInput(nu.link("misc_reflex")).setStyle({width: "35px"}),
+		new joInput(nu.link("temp_reflex")).setStyle({width: "35px"})]).setStyle({width: "500px"}),
 	new joFlexrow([
 		new joLabel("WILL").setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"})]).setStyle({width: "500px"})
+		new joInput(nu.link("will_tot")).setStyle({width: "35px"}),
+		new joInput(nu.link("base_will")).setStyle({width: "35px"}),
+		new joInput(nu.link("wis_mod")).setStyle({width: "35px"}),
+		new joInput(nu.link("misc_will")).setStyle({width: "35px"}),
+		new joInput(nu.link("temp_will")).setStyle({width: "35px"})]).setStyle({width: "500px"})
 ]);	
 //Contains melee/ranged attack bonuses
 var row3col2 = new joGroup([
@@ -213,18 +213,26 @@ var row3col2 = new joGroup([
 		new joLabel("Temp").setStyle({width: "35px"})]),
 	new joFlexrow([
 		new joLabel("Melee").setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"})]),
+		new joInput(nu.link("mel_tab")).setStyle({width: "35px"}),
+		new joInput(nu.link("mel_bab")).setStyle({width: "35px"}),
+		new joInput(nu.link("mel_misc")).setStyle({width: "35px"}),
+		new joInput(nu.link("mel_temp")).setStyle({width: "35px"})]),
 	new joFlexrow([
 		new joLabel("Ranged").setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"}),
-		new joInput(nu.link("")).setStyle({width: "35px"})])
+		new joInput(nu.link("ran_tab")).setStyle({width: "35px"}),
+		new joInput(nu.link("ran_bab")).setStyle({width: "35px"}),
+		new joInput(nu.link("ran_misc")).setStyle({width: "35px"}),
+		new joInput(nu.link("ran_temp")).setStyle({width: "35px"})])
 ]);	
- 
+
+var save_button = new joButton("Save Changes").selectEvent.subscribe(function() {
+	alert("joo push da button");
+}); 
+var load_button = new joButton("Load Sheet").selectEvent.subscribe(function() {
+	alert("joo push da button");
+});
+
+
 var slct = ["Character Sheet","Spells/Feats/Skills","Inventory"];
 
 	var card = new joCard([
@@ -246,7 +254,11 @@ var slct = ["Character Sheet","Spells/Feats/Skills","Inventory"];
 		new joFlexrow([row1col1,row1col2,row1col3,row1col4]),
 		new joFlexrow([row2col1,row2col2]),
 		new joFlexrow([row3col1,row3col2]),
-		new joFlexrow([new joLabel("Sheet Name"), new joInput(),new joButton("Save Changes"), new joButton("Load")])
+		new joFlexrow([
+			new joLabel("Sheet Name"), 
+			new joInput(),
+			save_button, 
+			new joButton("Load")])
 	]).setTitle("Character Sheet");
 	return card;
 });
