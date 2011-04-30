@@ -9,7 +9,7 @@ Data = {
 			return false;
 		}
 	},
-//loads the data stores...probably should return a json object to pass around...	
+//loads the data stores...	
 	load: function(store_name) {
 		var data = localStorage.getItem(store_name);
 		var jsonData = JSON.parse(data);
@@ -17,6 +17,15 @@ Data = {
 	},
 //saves the data store to the local storage	
 	save: function(store_name, data) {
-		localStorage.setItem(store_name, data);
+		var strung = JSON.stringify(data);
+		localStorage.setItem(store_name, strung);
+	},
+//either deletes a given local storage or all of it
+	banish: function(store_name, clear) {
+		if (clear) {
+			localStorage.clear();
+		} else {
+			localStorage.remove(store_name);
+		}
 	}
 };
