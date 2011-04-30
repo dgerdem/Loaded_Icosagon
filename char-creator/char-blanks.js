@@ -13,7 +13,7 @@ Blank_sheet =
 	"cha":0,"cha_mod":0,"temp_cha":0,
 	
 	"tot_hp":0,"cur_hp":0,"non_leth":0,"hit_d":0,"dmg_cut":0,
-	"tot_ac":0,"armor":0,"shield":0,"misc_ac":0,"deflect_ac":0,"nat_ac":0,
+	"tot_ac":0,"armor":0,"shield":0,"misc_ac":0,
 	"touch":0,"flat_foot":0,
 	"init":0,"misc_init":0,"speed":0,"armor_type":0,
 	
