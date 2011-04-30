@@ -309,7 +309,7 @@ joexpando {
   margin-bottom: 0;
 }
 joexpando.open {
-  margin-bottom: 10px;
+  margin-bottom: 1px;
 }
 joexpandocontent {
   padding-top: 10px;
@@ -366,7 +366,7 @@ textarea {
   overflow: hidden;
   outline: none;
   font-family: "Apres", "Verdana";
-  font-size: 17px;
+  font-size: 15px;
   -webkit-user-select: text;
   -moz-user-select: text;
   user-select: text;
@@ -391,9 +391,9 @@ joexpandotitle joicon {
   position: absolute;
   border: none;
   display: block;
-  height: 32px;
-  width: 32px;
-  right: 4px;
+  height: 15px;
+  width: 15px;
+  right: 15px;
   top: 10%;
   background: url(expando.png) no-repeat;
   -webkit-transform-origin: 16px 16px 0;
@@ -475,7 +475,7 @@ joexpandotitle {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  padding: 10px;
+  padding: 3px;
   cursor: pointer;
   text-align: left;
 }
