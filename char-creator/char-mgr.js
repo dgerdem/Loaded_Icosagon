@@ -2,7 +2,6 @@ App = {
 	load: function() {
 		jo.load();
 //stupid shit goes here	
-/*remove record, replace with references to json data?*/
 		if (Data.init()) {	
 			var nu = new joRecord(JSON.parse(Data.load("test")));
 			alert('loaded old');
@@ -137,15 +136,13 @@ var row2col2 = new joGroup([
 		new joLabel("Armor AC").setStyle({width: "35px"}),
 		new joLabel("Shield AC").setStyle({width: "35px"}),
 		new joLabel("Dex Mod").setStyle({width: "35px"}),
-		new joLabel("Misc Mod").setStyle({width: "35px"}),
-		new joLabel("Curr AC").setStyle({width: "35px"})]).setStyle({width: "375px"}),
+		new joLabel("Misc Mod").setStyle({width: "35px"})]).setStyle({width: "375px"}),
 	new joFlexrow([//*********************messed up labels
 		new joInput(nu.link("tot_ac")).setStyle({width: "35px"}),
 		new joInput(nu.link("armor")).setStyle({width: "35px"}),
 		new joInput(nu.link("shield")).setStyle({width: "35px"}),
-		new joInput(nu.link("misc_ac")).setStyle({width: "35px"}),
-		new joInput(nu.link("deflect_ac")).setStyle({width: "35px"}),
-		new joInput(nu.link("nat_ac")).setStyle({width: "35px"})]).setStyle({width: "375px"}),
+		new joInput(nu.link("dex_mod")).setStyle({width: "35px"}),
+		new joInput(nu.link("misc_ac")).setStyle({width: "35px"})]).setStyle({width: "375px"}),
 	new joDivider(),
 	new joFlexrow([
 		new joLabel("Touch AC").setStyle({width: "35px"}), 
@@ -219,15 +216,19 @@ var row3col2 = new joGroup([
 		new joInput(nu.link("ran_misc")).setStyle({width: "35px"}),
 		new joInput(nu.link("ran_temp")).setStyle({width: "35px"})])
 ]);	
-
+//TODO: Give this a little error handling
 var save_button = new joButton("Save Changes").selectEvent.subscribe(function() {
-	Data.save(sheet_name.getProperty("name"), JSON.stringify(nu.getData()));
-	alert("Data Saved as " + sheet_name.getProperty("name") + '"!');
+	Data.save(sheet_name.getProperty("name"), nu.getData());
+	alert('Data Saved as "' + sheet_name.getProperty("name") + '"!');
 }); 
+//TODO: Give this a little error handling
 var load_button = new joButton("Load Sheet").selectEvent.subscribe(function() {
-	alert("in");
 	var test = Data.load(sheet_name.getProperty("name"));
-	alert(test.char_name);
+	nu.setData(test);
+	alert('Data loaded from "' + sheet_name.getProperty("name") + '"!');
+});
+var delete_button = new joButton("Delete Sheet").selectEvent.subscribe(function() {
+	
 });
 //change nu property, and it updates
 var sheet_name = new joRecord({"name":""});
@@ -257,7 +258,8 @@ var slct = ["Character Sheet","Spells/Feats/Skills","Inventory"];
 			new joLabel("Sheet Name"), 
 			new joInput(sheet_name.link("name")),
 			save_button, 
-			load_button])
+			load_button,
+			delete_button])
 	]).setTitle("Character Sheet");
 	return card;
 });
