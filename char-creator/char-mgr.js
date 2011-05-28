@@ -18,6 +18,36 @@ App = {
 			]));
 		this.nav.setStack(this.stack);
 		
+		//subscribe to change event
+		//ugh...so much interaction
+		nu.changeEvent.subscribe(function(prop, rec) {
+			if (prop === "str" || prop === "temp_str") { //strength
+				var temp = Math.floor(((parseInt(nu.getProperty("str"))+parseInt(nu.getProperty("temp_str"))) - 10) / 2);
+				nu.setProperty("str_mod", temp);
+			} else if (prop === "dex" || prop === "temp_dex") { //dexterity
+				var temp = Math.floor(((parseInt(nu.getProperty("dex"))+parseInt(nu.getProperty("temp_dex"))) - 10) / 2);
+				nu.setProperty("dex_mod", temp);
+			} else if (prop === "con" || prop === "temp_con") { //constitution
+				var temp = Math.floor(((parseInt(nu.getProperty("con"))+parseInt(nu.getProperty("temp_con"))) - 10) / 2);
+				nu.setProperty("con_mod", temp);
+			} else if (prop === "int" || prop === "temp_int") { //intelligence
+				var temp = Math.floor(((parseInt(nu.getProperty("int"))+parseInt(nu.getProperty("temp_int"))) - 10) / 2);
+				nu.setProperty("int_mod", temp);
+			} else if (prop === "wis" || prop === "temp_wis") { //wisdom
+				var temp = Math.floor(((parseInt(nu.getProperty("wis"))+parseInt(nu.getProperty("temp_wis"))) - 10) / 2);
+				nu.setProperty("wis_mod", temp);
+			} else if (prop === "cha" || prop === "temp_cha") { //charisma
+				var temp = Math.floor(((parseInt(nu.getProperty("cha"))+parseInt(nu.getProperty("temp_cha"))) - 10) / 2);
+				nu.setProperty("cha_mod", temp);
+			//total ac	
+			} else if (prop === "armor" || prop === "shield" || prop === "dex_mod" || prop === "misc_ac") {
+				var temp = 10 + parseInt(nu.getProperty("armor")) + parseInt(nu.getProperty("shield")) + parseInt(nu.getProperty("dex_mod")) + parseInt(nu.getProperty("misc_ac"));
+				nu.setProperty("tot_ac", temp);
+			} else if (prop === "dex_mod" || prop === "misc_init"){ //initiative
+				var temp = parseInt(nu.getProperty("misc_init")) + parseInt(nu.getProperty("dex_mod"));
+				nu.setProperty("init", temp);
+			}
+		}, this);
 		
 // create our view card
 joCache.set("sheet", function() {
