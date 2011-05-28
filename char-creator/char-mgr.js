@@ -46,7 +46,22 @@ App = {
 			} else if (prop === "dex_mod" || prop === "misc_init"){ //initiative
 				var temp = parseInt(nu.getProperty("misc_init")) + parseInt(nu.getProperty("dex_mod"));
 				nu.setProperty("init", temp);
-			}
+			} else if (prop === "base_fort" || prop === "con_mod" || prop === "misc_fort" || prop === "temp_fort") {
+				var temp = parseInt(nu.getProperty("base_fort"))+parseInt(nu.getProperty("con_mod"))+parseInt(nu.getProperty("misc_fort"))+parseInt(nu.getProperty("temp_fort"));
+				nu.setProperty("fort_tot", temp);
+			} else if (prop === "base_reflex" || prop === "dex_mod" || prop === "misc_reflex" || prop === "temp_reflex") {
+				var temp = parseInt(nu.getProperty("base_reflex"))+parseInt(nu.getProperty("dex_mod"))+parseInt(nu.getProperty("misc_reflex"))+parseInt(nu.getProperty("temp_reflex"));
+				nu.setProperty("reflex_tot", temp);
+			} else if (prop === "base_will" || prop === "wis_mod" || prop === "misc_will" || prop === "temp_will") {
+				var temp = parseInt(nu.getProperty("base_will"))+parseInt(nu.getProperty("wis_mod"))+parseInt(nu.getProperty("misc_will"))+parseInt(nu.getProperty("temp_will"));
+				nu.setProperty("will_tot", temp);
+			} else if (prop === "mel_bab" || prop === "mel_misc" || prop === "mel_temp") {
+				var temp = parseInt(nu.getProperty("mel_bab"))+parseInt(nu.getProperty("mel_misc"))+parseInt(nu.getProperty("size_mod"))+parseInt(nu.getProperty("mel_temp"));
+				nu.setProperty("mel_tab", temp);
+			} else if (prop === "ran_bab" || prop === "ran_misc" || prop === "ran_temp") {
+				var temp = parseInt(nu.getProperty("ran_bab"))+parseInt(nu.getProperty("ran_misc"))+parseInt(nu.getProperty("ran_temp"));
+				nu.setProperty("ran_tab", temp);
+			}		
 		}, this);
 		
 // create our view card
