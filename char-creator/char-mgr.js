@@ -1,14 +1,12 @@
 App = {
 	load: function() {
-		jo.load();
-//stupid shit goes here	
+		jo.load();	
 		if (Data.init()) {	
 			var nu = new joRecord(JSON.parse(Data.load("test")));
 			alert('loaded old');
 		} else {
 			var nu = new joRecord(Blank_sheet);
-		}
-//diminished stupidity beyond this point		
+		}		
 		this.scn = new joScreen(
 			new joContainer([
 				new joFlexcol([
@@ -272,6 +270,7 @@ var load_button = new joButton("Load Sheet").selectEvent.subscribe(function() {
 	nu.setData(test);
 	alert('Data loaded from "' + sheet_name.getProperty("name") + '"!');
 });
+//TODO: create this function and add error handling
 var delete_button = new joButton("Delete Sheet").selectEvent.subscribe(function() {
 	
 });
