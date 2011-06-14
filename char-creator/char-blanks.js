@@ -27,7 +27,7 @@ Blank_sheet =
 	"ap":0
 	
 };
-Blank_inventory = {};
-Blank_spells = {};
-Blank_skills = {};
-Blank_feats = {};
+Blank_inventory = {id:[1,2,3,4,5],quants:[1,2],descr:[1,2],mods:[1,2],rolls:[1,2],equiped:[false,false]};
+Blank_spells = {id:[],lvl:[],castime:[],dur:[],targets:[],range:[],save:[],resist:[]};
+Blank_skills = {id:[],ablity:[],points:[]};
+Blank_feats = {id:[],descr:[],rolls:[]};
