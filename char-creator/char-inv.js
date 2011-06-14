@@ -2,22 +2,41 @@ joCache.set("inventory", function() {
 	var slct = ["Login/Chat","Action Console","Spells/Feats/Skills","Inventory","Character Sheet"];
 //load a saved object or start with a blank one to store an inventory	
 	if (Data.init()) {	
-		var nu = new joRecord(JSON.parse(Data.load("test")));
+		var nu = new joRecord(JSON.parse(Data.load("")));
 		alert('loaded old');
 	} else {
 		var nu = new joRecord(Blank_inventory);
 	}
+
+	var invent = new joSelect(nu.getProperty("id")).selectEvent.subscribe(function(inVar){
+		
+	});
 //item list
 	var row1col1 = new joGroup([
 		new joLabel("Inventory"), 
-		new joSelect(["item1", "item2"]),
+		invent,
 		new joLabel("Selected: "+""), 
 		new joFlexrow([
 			new joButton("Equip Selected Item")])]);
 //item attributes
 	var row1col2 = new joGroup([
 		new joLabel("Selected Item Attributes"), 
-		new joTable([["Name:",""],["Quantity:",""],["Description:",""],["Stat Mods:",""],["Rolls:",""]])]);
+		new joFlexrow([
+			new joLabel("Name").setStyle({width: "35px"}),
+			new joInput().setStyle({width: "35px"})]),
+		new joFlexrow([
+			new joLabel("Quantity").setStyle({width: "35px"}),
+			new joInput().setStyle({width: "35px"})]),
+		new joFlexrow([
+			new joLabel("Description").setStyle({width: "35px"}),
+			new joInput().setStyle({width: "35px"})]),
+		new joFlexrow([
+			new joLabel("Stat Mods?").setStyle({width: "35px"}),
+			new joInput().setStyle({width: "35px"})]),
+		new joFlexrow([
+			new joLabel("Rolls?").setStyle({width: "35px"}),
+			new joInput().setStyle({width: "35px"})])
+		]);
 //equipped list
 	var row2col1 = new joGroup([
 		new joLabel("List of Equipped"), 
@@ -26,7 +45,7 @@ joCache.set("inventory", function() {
 		new joButton("Remove Selected")]);
 //add item to list	
 	var row2col2 = new joGroup([
-		new joLabel("Set Item Attributes"), 
+		/*new joLabel("Set Item Attributes"), 
 		new joFlexrow([
 			new joLabel("Name").setStyle({width: "35px"}),
 			new joInput().setStyle({width: "35px"})]),
@@ -42,7 +61,7 @@ joCache.set("inventory", function() {
 		new joFlexrow([
 			new joLabel("Rolls?").setStyle({width: "35px"}),
 			new joInput().setStyle({width: "35px"})]),
-		new joButton("Add to Inventory")]);
+		new joButton("Add to Inventory")*/]);
 	
 	var slct = ["Character Sheet","Spells/Feats/Skills","Inventory"];
 	
@@ -50,13 +69,13 @@ joCache.set("inventory", function() {
 //TODO: Give this a little error handling
 var save_button = new joButton("Save Changes").selectEvent.subscribe(function() {
 	Data.save(sheet_name.getProperty("name"), nu.getData());
-	alert('Data Saved as "' + sheet_name.getProperty("name") + '"!');
+	alert('Data Saved as "' + inv_name.getProperty("name") + '"!');
 }); 
 //TODO: Give this a little error handling
 var load_button = new joButton("Load Inventory").selectEvent.subscribe(function() {
-	var test = Data.load(sheet_name.getProperty("name"));
+	var test = Data.load(inv_name.getProperty("name"));
 	nu.setData(test);
-	alert('Data loaded from "' + sheet_name.getProperty("name") + '"!');
+	alert('Data loaded from "' + inv_name.getProperty("name") + '"!');
 });
 //TODO: create this function and add error handling
 var delete_button = new joButton("Delete Inventory").selectEvent.subscribe(function() {
