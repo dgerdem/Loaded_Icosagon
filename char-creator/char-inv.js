@@ -1,21 +1,47 @@
 joCache.set("inventory", function() {
 	var slct = ["Login/Chat","Action Console","Spells/Feats/Skills","Inventory","Character Sheet"];
 //load a saved object or start with a blank one to store an inventory	
-	if (Data.init()) {	
+	/*if (Data.init()) {	
 		var nu = new joRecord(JSON.parse(Data.load("")));
 		alert('loaded old');
 	} else {
 		var nu = new joRecord(Blank_inventory);
-	}
-
-	var invent = new joSelect(nu.getProperty("id")).selectEvent.subscribe(function(inVar){
+	}*/
+	var nu = Blank_inventory; //blank data storage object
+	var od = new joRecord({arr:[]});
+	var inv_index = 0; //index of a selected item
+	var equ_index = 0; //index of a selected equipped item
+	//dropdown selector for inventory items
+	var invent = new joSelect(nu.id).selectEvent.subscribe(function(value, list){
+		inv_index = value;
+		name_field.setData(nu.id[value]);
+		quant_field.setData(nu.quants[value]);
+		desc_field.setData(nu.descr[value]);
+		stat_field.setData(nu.mods[value]);
+		roll_field.setData(nu.rolls[value]);
+	});
+	//dropdown selector for equipped items items
+	var equipped = new joSelect(od).selectEvent.subscribe(function(value, list){
+		equ_index = value;
+		name_field.setData(nu.id[value]);
+		quant_field.setData(nu.quants[value]);
+		desc_field.setData(nu.descr[value]);
+		stat_field.setData(nu.mods[value]);
+		roll_field.setData(nu.rolls[value]);
+	});
+	//adds a selected item to the equipped list (and will apply any mods?)
+	var equip_item = new joButton("Equip Selected Item").selectEvent.subscribe(function(){
+		od.push(nu.id[inv_index]);
+		nu.equiped[inv_index] = true;
+	});
+	var unequip_item = new joButton("Equip Selected Item").selectEvent.subscribe(function(){
 		
 	});
+	
 //item list
 	var row1col1 = new joGroup([
 		new joLabel("Inventory"), 
-		invent,
-		new joLabel("Selected: "+""), 
+		invent, 
 		new joFlexrow([
 			new joButton("Equip Selected Item")])]);
 //item attributes
@@ -23,25 +49,24 @@ joCache.set("inventory", function() {
 		new joLabel("Selected Item Attributes"), 
 		new joFlexrow([
 			new joLabel("Name").setStyle({width: "35px"}),
-			new joInput().setStyle({width: "35px"})]),
+			name_field = new joInput().setStyle({width: "35px"})]),
 		new joFlexrow([
 			new joLabel("Quantity").setStyle({width: "35px"}),
-			new joInput().setStyle({width: "35px"})]),
+			quant_field = new joInput().setStyle({width: "35px"})]),
 		new joFlexrow([
 			new joLabel("Description").setStyle({width: "35px"}),
-			new joInput().setStyle({width: "35px"})]),
+			desc_field = new joTextarea().setStyle({width:"35px",minHeight:"100px",maxHeight: "300px"})]),
 		new joFlexrow([
 			new joLabel("Stat Mods?").setStyle({width: "35px"}),
-			new joInput().setStyle({width: "35px"})]),
+			stat_field = new joInput().setStyle({width: "35px"})]),
 		new joFlexrow([
 			new joLabel("Rolls?").setStyle({width: "35px"}),
-			new joInput().setStyle({width: "35px"})])
+			roll_field = new joInput().setStyle({width: "35px"})])
 		]);
 //equipped list
 	var row2col1 = new joGroup([
 		new joLabel("List of Equipped"), 
-		new joSelect(["",""]), 
-		new joLabel("Selected: "+""),
+		equipped, 
 		new joButton("Remove Selected")]);
 //add item to list	
 	var row2col2 = new joGroup([
