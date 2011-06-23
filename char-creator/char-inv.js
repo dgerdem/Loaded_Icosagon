@@ -8,11 +8,13 @@ joCache.set("inventory", function() {
 		var nu = new joRecord(Blank_inventory);
 	}*/
 	var nu = Blank_inventory; //blank data storage object
-	var od = new joRecord({arr:[]});
+	var od = new joRecord({arr:[1,2,3]});
+	//od.getProperty("arr")[1]
 	var inv_index = 0; //index of a selected item
 	var equ_index = 0; //index of a selected equipped item
 	//dropdown selector for inventory items
-	var invent = new joSelect(nu.id).selectEvent.subscribe(function(value, list){
+	var invent = new joSelect([1,2,3,4,5]);
+	invent.selectEvent.subscribe(function(value, list){
 		inv_index = value;
 		name_field.setData(nu.id[value]);
 		quant_field.setData(nu.quants[value]);
@@ -21,7 +23,8 @@ joCache.set("inventory", function() {
 		roll_field.setData(nu.rolls[value]);
 	});
 	//dropdown selector for equipped items items
-	var equipped = new joSelect(od).selectEvent.subscribe(function(value, list){
+	var equipped = new joSelect(od.getProperty("arr"))
+	equipped.selectEvent.subscribe(function(value, list){
 		equ_index = value;
 		name_field.setData(nu.id[value]);
 		quant_field.setData(nu.quants[value]);
@@ -31,12 +34,27 @@ joCache.set("inventory", function() {
 	});
 	//adds a selected item to the equipped list (and will apply any mods?)
 	var equip_item = new joButton("Equip Selected Item").selectEvent.subscribe(function(){
-		od.push(nu.id[inv_index]);
+		od.getProperty("arr").push(nu.id[inv_index]);
+		alert(od.getProperty("arr"));
 		nu.equiped[inv_index] = true;
 	});
+	//removes an item from the equipped list
 	var unequip_item = new joButton("Equip Selected Item").selectEvent.subscribe(function(){
 		
 	});
+	//get a value from a jorecord that contains an array more easily
+	var gp = function(record, prop, index){
+		return record.getProperty(prop)[index];
+	};
+	//append a value top the end of an array in a jorecord
+	var sp = function(record, prop, data){
+		record.getProperty(prop).push(data);
+        record.getDelegate(prop).changeEvent.fire();
+	};
+	//remove an item from an array in a jorecord
+	var rp = function(record, prop, index){
+		record.getProperty(prop).splice(index, 1);
+	};
 	
 //item list
 	var row1col1 = new joGroup([
@@ -70,23 +88,10 @@ joCache.set("inventory", function() {
 		new joButton("Remove Selected")]);
 //add item to list	
 	var row2col2 = new joGroup([
-		/*new joLabel("Set Item Attributes"), 
 		new joFlexrow([
-			new joLabel("Name").setStyle({width: "35px"}),
-			new joInput().setStyle({width: "35px"})]),
-		new joFlexrow([
-			new joLabel("Quantity").setStyle({width: "35px"}),
-			new joInput().setStyle({width: "35px"})]),
-		new joFlexrow([
-			new joLabel("Description").setStyle({width: "35px"}),
-			new joInput().setStyle({width: "35px"})]),
-		new joFlexrow([
-			new joLabel("Stat Mods?").setStyle({width: "35px"}),
-			new joInput().setStyle({width: "35px"})]),
-		new joFlexrow([
-			new joLabel("Rolls?").setStyle({width: "35px"}),
-			new joInput().setStyle({width: "35px"})]),
-		new joButton("Add to Inventory")*/]);
+			new joButton("Roll Item")
+		])
+	]).setStyle({maxHeight:"600px"});
 	
 	var slct = ["Character Sheet","Spells/Feats/Skills","Inventory"];
 	
