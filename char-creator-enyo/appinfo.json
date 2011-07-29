@@ -1,10 +1,10 @@
 {
-	"id": "com.palmdts.enyo.helloworld",
+	"id": "com.palmdts.enyo.lico-edit",
 	"version": "1.0.0",
-	"vendor": "HP",
+	"vendor": "Gerds",
 	"type": "web",
 	"main": "index.html",
-	"title": "Enyo HelloWorld",
+	"title": "Lico Edit",
 	"icon": "icon.png",
 	"uiRevision": 2
 }
