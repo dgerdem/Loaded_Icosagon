@@ -1,5 +1,7 @@
-/* Copyright 2009-2011 Hewlett-Packard Development Company, L.P. All rights reserved. */
+
 enyo.depends(
-	"HelloWorld.js",
-	"HelloWorld.css"
+	"char-mgr-enyo.js",
+	"char-mgr.css",
+	"char-blanks.js",
+	"../libraries-enyo/char-data.js"
 );
