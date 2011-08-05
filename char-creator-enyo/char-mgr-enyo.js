@@ -4,12 +4,25 @@ var nu = Blank_Sheet;
 enyo.kind({
 	name: "enyo.Canon.lico_char_edit",
 	kind: enyo.VFlexBox,
-	blah:Blank_Sheet,
-	test:function(insend){
+	saveFunc:function(insend){
 		var temp = insend.name;
 		var temp2 = insend.value;
 		eval("nu."+temp+"="+"'"+temp2+"'");
-		enyo.log(nu.race);
+	},
+	statCalc:function(insend){
+		var temp = insend.name;
+		var temp2 = insend.value;
+		eval("nu."+temp+"="+"'"+temp2+"'");
+		var x = insend.name.split("_");
+		enyo.log(x[0]);
+		var got_norm = eval("this.$."+x[0]+".getValue();");
+		var got_temp = eval("this.$."+x[0]+"_temp.getValue();");
+		if (got_norm == "") {got_norm = 0};
+		if (got_temp == "") {got_temp = 0};
+		eval("this.$."+x[0]+"_mod.setValue((Math.floor(((parseInt(got_norm)+parseInt(got_temp)) - 10) / 2)))");
+	},
+	saveNset:function(insend){
+			
 	},
 	components: [
 		{kind: "Scroller", flex: 1, components: [
@@ -28,28 +41,28 @@ enyo.kind({
 			{kind: "DividerDrawer" ,flex: 1, caption: "Character Information", components: [
 				{kind: "HFlexBox", components: [
 					{kind: "RowGroup",flex: 1, components: [
-						{kind: "Input", name:"name1", hint:"Character Name", value:nu.char_name},
-						{kind: "Input", name:"race", hint:"Race", value:nu.race, onchange:'test'},
-						{kind: "Input", name:"alignment", hint:"Alignment", value:nu.align},
-						{kind: "Input", name:"class1", hint:"Class", value:nu.cclass}
+						{kind: "Input", name:"name1", hint:"Character Name", value:nu.char_name, onchange:'saveFunc'},
+						{kind: "Input", name:"race", hint:"Race", value:nu.race, onchange:'saveFunc'},
+						{kind: "Input", onchange:'saveFunc', onchange:'saveFunc', name:"alignment", hint:"Alignment", value:nu.align},
+						{kind: "Input", onchange:'saveFunc', name:"class1", hint:"Class", value:nu.cclass}
 					]},
 					{kind: "RowGroup",flex: 1, components: [
-						{kind: "Input", name:"level", hint:"Character Level", value:nu.level},
-						{kind: "Input", name:"tot_xp", hint:"Total XP", value:nu.tot_xp},
-						{kind: "Input", name:"xp_change", hint:"XP Change", value:nu.xp_ch},
-						{kind: "Input", name:"next_lvl", hint:"Next Level", value:nu.nex_lvl_xp}
+						{kind: "Input", onchange:'saveFunc', name:"level", hint:"Character Level", value:nu.level},
+						{kind: "Input", onchange:'saveFunc', name:"tot_xp", hint:"Total XP", value:nu.tot_xp},
+						{kind: "Input", onchange:'saveFunc', name:"xp_change", hint:"XP Change", value:nu.xp_ch},
+						{kind: "Input", onchange:'saveFunc', name:"next_lvl", hint:"Next Level", value:nu.nex_lvl_xp}
 					]},
 					{kind: "RowGroup",flex: 1, components: [
-						{kind: "Input", name:"diety", hint:"Diety", value:nu.diety},
-						{kind: "Input", name:"size", hint:"Character Size", value:nu.size},
-						{kind: "Input", name:"age", hint:"Character Age", value:nu.age},
-						{kind: "Input", name:"gender", hint:"Gender", value:nu.gender}
+						{kind: "Input", onchange:'saveFunc', name:"diety", hint:"Diety", value:nu.diety},
+						{kind: "Input", onchange:'saveFunc', name:"size", hint:"Character Size", value:nu.size},
+						{kind: "Input", onchange:'saveFunc', name:"age", hint:"Character Age", value:nu.age},
+						{kind: "Input", onchange:'saveFunc', name:"gender", hint:"Gender", value:nu.gender}
 					]},
 					{kind: "RowGroup",flex: 1, components: [
-						{kind: "Input", name:"height", hint:"Height", value:nu.height},
-						{kind: "Input", name:"weight", hint:"Weight", value:nu.weight},
-						{kind: "Input", name:"eye_color", hint:"Eye Color", value:nu.eyes},
-						{kind: "Input", name:"hair_color", hint:"Hair Color", value:nu.hair}
+						{kind: "Input", onchange:'saveFunc', name:"height", hint:"Height", value:nu.height},
+						{kind: "Input", onchange:'saveFunc', name:"weight", hint:"Weight", value:nu.weight},
+						{kind: "Input", onchange:'saveFunc', name:"eye_color", hint:"Eye Color", value:nu.eyes},
+						{kind: "Input", onchange:'saveFunc', name:"hair_color", hint:"Hair Color", value:nu.hair}
 					]}
 				]}
 			]},
@@ -68,30 +81,30 @@ enyo.kind({
 						]},
 						{kind:"Group",style:"width:36px", components:[
 							{className: "enyo-picker-label", content: "Score"},
-							{kind:"Input", name:"str", style:"margin:-10px 0px -10px 0px", value:nu.str},
-							{kind:"Input", name:"dex", style:"margin:-10px 0px -10px 0px", value:nu.dex},
-							{kind:"Input", name:"con", style:"margin:-10px 0px -10px 0px", value:nu.con},
-							{kind:"Input", name:"int", style:"margin:-10px 0px -10px 0px", value:nu.int1},
-							{kind:"Input", name:"wis", style:"margin:-10px 0px -10px 0px", value:nu.wis},
-							{kind:"Input", name:"cha", style:"margin:-10px 0px -10px 0px", value:nu.cha}
+							{kind:"Input", onchange:'statCalc', name:"str", style:"margin:-10px 0px -10px 0px", value:nu.str},
+							{kind:"Input", onchange:'statCalc', name:"dex", style:"margin:-10px 0px -10px 0px", value:nu.dex},
+							{kind:"Input", onchange:'statCalc', name:"con", style:"margin:-10px 0px -10px 0px", value:nu.con},
+							{kind:"Input", onchange:'statCalc', name:"int1", style:"margin:-10px 0px -10px 0px", value:nu.int1},
+							{kind:"Input", onchange:'statCalc', name:"wis", style:"margin:-10px 0px -10px 0px", value:nu.wis},
+							{kind:"Input", onchange:'statCalc', name:"cha", style:"margin:-10px 0px -10px 0px", value:nu.cha}
 						]},
 						{kind:"Group",style:"width:36px", components:[ //read only
 							{className: "enyo-picker-label", content: "Mod"},
-							{kind:"Input", name:"str_mod", style:"margin:-10px 0px -10px 0px", value:nu.str_mod},
-							{kind:"Input", name:"dex_mod", style:"margin:-10px 0px -10px 0px", value:nu.dex_mod},
-							{kind:"Input", name:"con_mod", style:"margin:-10px 0px -10px 0px", value:nu.con_mod},
-							{kind:"Input", name:"int_mod", style:"margin:-10px 0px -10px 0px", value:nu.int_mod},
-							{kind:"Input", name:"wis_mod", style:"margin:-10px 0px -10px 0px", value:nu.wis_mod},
-							{kind:"Input", name:"cha_mod", style:"margin:-10px 0px -10px 0px", value:nu.cha_mod}
+							{kind:"Input", onchange:'saveNset', name:"str_mod", style:"margin:-10px 0px -10px 0px", value:nu.str_mod},
+							{kind:"Input", onchange:'saveNset', name:"dex_mod", style:"margin:-10px 0px -10px 0px", value:nu.dex_mod},
+							{kind:"Input", onchange:'saveNset', name:"con_mod", style:"margin:-10px 0px -10px 0px", value:nu.con_mod},
+							{kind:"Input", onchange:'saveNset', name:"int1_mod", style:"margin:-10px 0px -10px 0px", value:nu.int_mod},
+							{kind:"Input", onchange:'saveNset', name:"wis_mod", style:"margin:-10px 0px -10px 0px", value:nu.wis_mod},
+							{kind:"Input", onchange:'saveNset', name:"cha_mod", style:"margin:-10px 0px -10px 0px", value:nu.cha_mod}
 						]},
 						{kind:"Group",style:"width:36px", components:[
 							{className: "enyo-picker-label", content: "Temp"},
-							{kind:"Input", name:"temp_str", style:"margin:-10px 0px -10px 0px", value:nu.temp_str},
-							{kind:"Input", name:"temp_dex", style:"margin:-10px 0px -10px 0px", value:nu.temp_dex},
-							{kind:"Input", name:"temp_con", style:"margin:-10px 0px -10px 0px", value:nu.temp_con},
-							{kind:"Input", name:"temp_int", style:"margin:-10px 0px -10px 0px", value:nu.temp_int},
-							{kind:"Input", name:"temp_wis", style:"margin:-10px 0px -10px 0px", value:nu.temp_wis},
-							{kind:"Input", name:"temp_cha", style:"margin:-10px 0px -10px 0px", value:nu.temp_con}
+							{kind:"Input", onchange:'statCalc', name:"str_temp", style:"margin:-10px 0px -10px 0px", value:nu.str_temp},
+							{kind:"Input", onchange:'statCalc', name:"dex_temp", style:"margin:-10px 0px -10px 0px", value:nu.dex_temp},
+							{kind:"Input", onchange:'statCalc', name:"con_temp", style:"margin:-10px 0px -10px 0px", value:nu.con_temp},
+							{kind:"Input", onchange:'statCalc', name:"int1_temp", style:"margin:-10px 0px -10px 0px", value:nu.int1_temp},
+							{kind:"Input", onchange:'statCalc', name:"wis_temp", style:"margin:-10px 0px -10px 0px", value:nu.wis_temp},
+							{kind:"Input", onchange:'statCalc', name:"cha_temp", style:"margin:-10px 0px -10px 0px", value:nu.con_temp}
 						]},
 						{kind:"Group",flex: 1, components:[
 							{kind:"HFlexBox", style:"margin:-10px 0px -10px 0px",flex: 1, components:[
