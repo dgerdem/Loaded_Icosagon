@@ -9,12 +9,12 @@ Blank_Sheet = {
 		diety:"",size:"",age:"",gender:"",
 		height:"",weight:"",eyes:"",hair:"",
 	
-		str:"",str_mod:"",temp_str:"",
-		dex:"",dex_mod:"",temp_dex:"",
-		con:"",con_mod:"",temp_con:"",
-		int1:"",int_mod:"",temp_int:"",
-		wis:"",wis_mod:"",temp_wis:"",
-		cha:"",cha_mod:"",temp_cha:"",
+		str:"",str_mod:"",str_temp:"",
+		dex:"",dex_mod:"",dex_temp:"",
+		con:"",con_mod:"",con_temp:"",
+		int1:"",int1_mod:"",int1_temp:"",
+		wis:"",wis_mod:"",wis_temp:"",
+		cha:"",cha_mod:"",cha_temp:"",
 	
 		tot_hp:"",cur_hp:"",non_leth:"",hit_d:"",dmg_cut:"",
 		tot_ac:"",armor:"",shield:"",misc_ac:"",
