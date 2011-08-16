@@ -17,7 +17,7 @@ Blank_Sheet = {
 		cha:"",cha_mod:"",cha_temp:"",
 	
 		tot_hp:"",cur_hp:"",non_leth:"",hit_d:"",dmg_cut:"",
-		tot_ac:"",armor:"",shield:"",misc_ac:"",
+		tot_ac:"",armor:0,shield:0,misc_ac:0,
 		touch:"",flat_foot:"",
 		init:"",misc_init:"",speed:"",armor_type:"",
 	
