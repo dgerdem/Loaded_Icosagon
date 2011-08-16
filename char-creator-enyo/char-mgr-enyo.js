@@ -1,5 +1,11 @@
 
-var nu = Blank_Sheet;
+
+if (Data.init()) {	
+	var nu = Data.load("saved-sheet");
+	alert('loaded old');
+} else {
+	var nu = Blank_Sheet;
+}	
 
 enyo.kind({
 	name: "enyo.Canon.lico_char_edit",
@@ -14,21 +20,49 @@ enyo.kind({
 		var temp2 = insend.value;
 		eval("nu."+temp+"="+"'"+temp2+"'");
 		var x = insend.name.split("_");
-		enyo.log(x[0]);
 		var got_norm = eval("this.$."+x[0]+".getValue();");
 		var got_temp = eval("this.$."+x[0]+"_temp.getValue();");
+		
 		if (got_norm == "") {got_norm = 0};
 		if (got_temp == "") {got_temp = 0};
 		eval("this.$."+x[0]+"_mod.setValue((Math.floor(((parseInt(got_norm)+parseInt(got_temp)) - 10) / 2)))");
+		
+		var y = Math.floor(((parseInt(got_norm)+parseInt(got_temp)) - 10) / 2);
+		if (temp.indexOf("dex") != -1){
+			eval("nu."+temp+"="+"'"+y+"'");	
+			this.$.dex_mod2.setValue(y);
+			this.$.dex_mod3.setValue(y);
+			this.$.dex_mod4.setValue(y);
+		} else if (temp.indexOf("wis") != -1) {
+			eval("nu."+temp+"="+"'"+y+"'");	
+			this.$.wis_mod2.setValue(y);
+		} else if (temp.indexOf("con") != -1) {
+			eval("nu."+temp+"="+"'"+y+"'");	
+			this.$.con_mod2.setValue(y);
+		}
 	},
-	saveNset:function(insend){
-			
+	saveSheet:function(insend){
+		Data.save("saved-sheet",nu);
+	},
+	armorChange:function(insend){
+		var temp = insend.name;
+		var temp2 = insend.value;
+		eval("nu."+temp+"="+"'"+temp2+"'");
+		var a = parseInt(this.$.armor.getValue());
+		var b = parseInt(this.$.shield.getValue());
+		var c = parseInt(this.$.dex_mod.getValue());
+		var d = parseInt(this.$.misc_ac.getValue());
+		this.$.tot_ac.setValue(a+b+c+d);
+		nu.tot_ac = a+b+c+d;
+	},
+	initChange:function(insend){
+	
 	},
 	components: [
 		{kind: "Scroller", flex: 1, components: [
 			{kind:"Toolbar", components: [
 				{kind: "IntegerPicker", label: "Character Sheet", min: 0, max: 10},
-				{kind: "Button", caption:"Save"},
+				{kind: "Button", caption:"Save", onclick:"saveSheet"},
 				{kind: "Button", caption:"Load"},
 				{kind: "Button", caption:"Delete"},
 				{kind:"Spacer"},
@@ -90,12 +124,12 @@ enyo.kind({
 						]},
 						{kind:"Group",style:"width:36px", components:[ //read only
 							{className: "enyo-picker-label", content: "Mod"},
-							{kind:"Input", onchange:'saveNset', name:"str_mod", style:"margin:-10px 0px -10px 0px", value:nu.str_mod},
-							{kind:"Input", onchange:'saveNset', name:"dex_mod", style:"margin:-10px 0px -10px 0px", value:nu.dex_mod},
-							{kind:"Input", onchange:'saveNset', name:"con_mod", style:"margin:-10px 0px -10px 0px", value:nu.con_mod},
-							{kind:"Input", onchange:'saveNset', name:"int1_mod", style:"margin:-10px 0px -10px 0px", value:nu.int_mod},
-							{kind:"Input", onchange:'saveNset', name:"wis_mod", style:"margin:-10px 0px -10px 0px", value:nu.wis_mod},
-							{kind:"Input", onchange:'saveNset', name:"cha_mod", style:"margin:-10px 0px -10px 0px", value:nu.cha_mod}
+							{kind:"Input", name:"str_mod", style:"margin:-10px 0px -10px 0px", value:nu.str_mod},
+							{kind:"Input", name:"dex_mod", style:"margin:-10px 0px -10px 0px", value:nu.dex_mod},
+							{kind:"Input", name:"con_mod", style:"margin:-10px 0px -10px 0px", value:nu.con_mod},
+							{kind:"Input", name:"int1_mod", style:"margin:-10px 0px -10px 0px", value:nu.int_mod},
+							{kind:"Input", name:"wis_mod", style:"margin:-10px 0px -10px 0px", value:nu.wis_mod},
+							{kind:"Input", name:"cha_mod", style:"margin:-10px 0px -10px 0px", value:nu.cha_mod}
 						]},
 						{kind:"Group",style:"width:36px", components:[
 							{className: "enyo-picker-label", content: "Temp"},
@@ -111,7 +145,6 @@ enyo.kind({
 								{kind:"RowGroup",flex: 1, caption:"Total HP", components:[
 									{kind:"Input", name:"tot_hp", value:nu.tot_hp}
 								]},
-								{className: "enyo-picker-label", content: "="},
 								{kind:"RowGroup",flex: 1, caption:"Current HP", components:[
 									{kind:"Input", name:"cur_hp", value:nu.cur_hp}
 								]},
@@ -132,16 +165,16 @@ enyo.kind({
 								]},
 								{className: "enyo-picker-label", content: "="},
 								{kind:"RowGroup",flex: 1, caption:"Armor AC", components:[
-									{kind:"Input", name:"armor", value:nu.armor}
+									{kind:"Input",onchange:"armorChange", name:"armor", value:nu.armor}
 								]},
 								{kind:"RowGroup",flex: 1, caption:"Shield AC", components:[
-									{kind:"Input", name:"shield", value:nu.shield}
+									{kind:"Input",onchange:"armorChange", name:"shield", value:nu.shield}
 								]},
 								{kind:"RowGroup",flex: 1, caption:"Dex Mod", components:[
-									{kind:"Input", name:"dex_mod2", value:nu.dex_mod}
+									{kind:"Input",onchange:"armorChange", name:"dex_mod2", value:""}
 								]},
 								{kind:"RowGroup", flex: 1,caption:"Misc Mod", components:[
-									{kind:"Input", name:"misc_ac", value:nu.misc_ac}
+									{kind:"Input",onchange:"armorChange", name:"misc_ac", value:nu.misc_ac}
 								]}
 							]},
 							{kind:"HFlexBox", style:"margin:-10px 0px -10px 0px",style:"width:300px",flex: 1, components:[
@@ -158,7 +191,7 @@ enyo.kind({
 								]},
 								{className: "enyo-picker-label", content: "="},
 								{kind:"RowGroup",flex: 1, caption:"Dex Mod", components:[
-									{kind:"Input", name:"dex_mod3", value:nu.dex_mod}
+									{kind:"Input", name:"dex_mod3", value:""}
 								]},
 								{kind:"RowGroup",flex: 1, caption:"Misc Mod", components:[
 									{kind:"Input", name:"misc_init", value:nu.misc_init}
@@ -198,9 +231,9 @@ enyo.kind({
 						]},
 						{kind:"Group",style:"width:37px", components:[
 							{className: "enyo-picker-label", content: "Ability"},
-							{kind:"Input", name:"con_mod2", style:"margin:-10px 0px -10px 0px", value:0},
-							{kind:"Input", name:"dex_mod4", style:"margin:-10px 0px -10px 0px", value:0},
-							{kind:"Input", name:"wis_mod2", style:"margin:-10px 0px -10px 0px", value:0},
+							{kind:"Input", name:"con_mod2", style:"margin:-10px 0px -10px 0px", value:""},
+							{kind:"Input", name:"dex_mod4", style:"margin:-10px 0px -10px 0px", value:""},
+							{kind:"Input", name:"wis_mod2", style:"margin:-10px 0px -10px 0px", value:""},
 						]},
 						{kind:"Group",style:"width:37px", components:[
 							{className: "enyo-picker-label", content: "Misc"},
